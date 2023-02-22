@@ -1,6 +1,5 @@
 package vttp2022.assessment.csf.orderbackend.services;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +26,6 @@ public class OrderService {
 	// IMPORTANT: Do not change the method's signature
 	public List<OrderSummary> getOrdersByEmail(String email) {
 		// Use priceSvc to calculate the total cost of an order
+		return null;
 	}
 }
