@@ -1,7 +1,17 @@
 <h2>Orders for {{email}}</h2>
 
+<!-- if there are no orders, display no order message -->
 <table>
     <tr>
-        <td>Each entry goes in here</td>
+        <td><b>Order ID:</b></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><b>Price:</b></td>
+        <td></td>
     </tr>
 </table>
+
+<div>
+    <a [routerLink]="['/']"><button type="button">Back to Ordering</button></a>
+</div>

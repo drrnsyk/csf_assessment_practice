@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Order } from '../models';
+import { PizzaService } from '../pizza.service';
 
 const SIZES: string[] = [
   "Personal - 6 inches",
@@ -26,7 +27,7 @@ export class MainComponent implements OnInit {
 
   orderForm!: FormGroup
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router, private pizzaSvc: PizzaService) {}
 
   ngOnInit(): void {
     this.orderForm = this.createForm()
@@ -42,12 +43,16 @@ export class MainComponent implements OnInit {
     console.info('>>> MainComponent: ngSubmit: order: ', order)
     // navigate to the view 1
     this.router.navigate(['/orders', order.email])
+    // calls pizza service, pass in the obtained order, to make http post request to springboot
+    this.pizzaSvc.createOrder(order)
   }
 
   listOrders() {
     const email: string = this.orderForm.value['email']
     // navigate to the view 1
     this.router.navigate(['/orders', email])
+    // calls pizza service, pass in the email as parameterized value, to make http get request to springboot
+    this.pizzaSvc.getOrders(email)
   }
 
   onCheckboxChange(e: any) {
