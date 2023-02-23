@@ -22,8 +22,21 @@ export class PizzaService {
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
 
+    // construct the payload to match the angular and springboot models
+    const payload = {
+      name: order.name,
+      email: order.email,
+      size: order.size,
+      thickCrust: order.base == 'thick' ? true : false,
+      sauce: order.sauce,
+      toppings: order.toppings,
+      comments: order.comments
+    }
+
+    console.info('>>> PizzaService: payload sent to springboot: ', payload)
+
     return firstValueFrom(
-      this.http.post<Order>(`/api/order`, order, { headers: headers} )
+      this.http.post<Order>(`/api/order`, payload, { headers: headers} )
     )
 
   }
@@ -33,10 +46,10 @@ export class PizzaService {
 
   getOrders(email: string): Promise<Order[]> { 
     return firstValueFrom<Order[]>(
-      this.http.get<any>(`/api/order/${email}`)
+      this.http.get<any>(`/api/order/${email}/all`)
     )
     
   }
 
-  
+
 }
