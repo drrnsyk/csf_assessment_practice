@@ -2,10 +2,16 @@ package vttp2022.assessment.csf.orderbackend.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import vttp2022.assessment.csf.orderbackend.models.Order;
+import vttp2022.assessment.csf.orderbackend.models.OrderSummary;
+
 import static vttp2022.assessment.csf.orderbackend.repositories.Queries.*;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @Repository
 public class OrderRepository {
@@ -29,4 +35,17 @@ public class OrderRepository {
             order.getComments()) > 0;
     }
 
+
+    public List<Order> getOrdersByEmail(String email) {
+        
+        SqlRowSet rs = jdbcTemplate.queryForRowSet(SQL_SELECT_ORDER_BY_EMAIL, email);
+
+        List<Order> orders = new LinkedList<>();
+        while (rs.next())
+            orders.add(Order.create(rs));
+
+        return orders;
+
+    }
+ 
 }

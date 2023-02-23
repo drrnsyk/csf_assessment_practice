@@ -52,7 +52,7 @@ export class MainComponent implements OnInit {
     // navigate to the view 1
     this.router.navigate(['/orders', email])
     // calls pizza service, pass in the email as parameterized value, to make http get request to springboot
-    this.pizzaSvc.getOrders(email)
+    // this.pizzaSvc.getOrders(email)
   }
 
   onCheckboxChange(e: any) {

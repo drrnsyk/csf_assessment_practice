@@ -1,7 +1,10 @@
 package vttp2022.assessment.csf.orderbackend.models;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 // IMPORTANT: You can add to this class, but you cannot delete its original content
 
@@ -40,5 +43,27 @@ public class Order {
 
 	public void setComments(String comments) { this.comments = comments; }
 	public String getComments() { return this.comments; }
+
+
+	// helper functions
+	public static Order create(SqlRowSet rs) {
+
+		// convert the comma seperated string for toppings in sql into a list
+		String toppingsStr = rs.getString("toppings");
+		String[] toppingsStrArr = toppingsStr.split(",");
+		List<String> toppingsList = Arrays.asList(toppingsStrArr);
+
+		// build the order object
+		Order order = new Order();
+		order.setOrderId(rs.getInt("order_id"));
+		order.setName(rs.getString("name"));
+		order.setEmail(rs.getString("email"));
+		order.setSize(rs.getInt("pizza_size"));
+		order.setSauce(rs.getString("sauce"));
+		order.setThickCrust(rs.getBoolean("thick_crust"));
+		order.setToppings(toppingsList);
+		order.setComments(rs.getString("comments"));
+		return order;
+	}
 
 }

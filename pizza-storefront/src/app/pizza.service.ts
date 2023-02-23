@@ -4,7 +4,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { firstValueFrom } from "rxjs";
-import { Order } from "./models";
+import { Order, OrderSummary } from "./models";
 
 @Injectable()
 export class PizzaService {
@@ -44,9 +44,9 @@ export class PizzaService {
   // GET /api/order/<email>/all
   // Add any required parameters or return type
 
-  getOrders(email: string): Promise<Order[]> { 
-    return firstValueFrom<Order[]>(
-      this.http.get<any>(`/api/order/${email}/all`)
+  getOrders(email: string): Promise<OrderSummary[]> { 
+    return firstValueFrom<OrderSummary[]>(
+      this.http.get<OrderSummary[]>(`/api/order/${email}/all`)
     )
     
   }
