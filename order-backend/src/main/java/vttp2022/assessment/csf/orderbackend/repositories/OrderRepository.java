@@ -6,7 +6,6 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import vttp2022.assessment.csf.orderbackend.models.Order;
-import vttp2022.assessment.csf.orderbackend.models.OrderSummary;
 
 import static vttp2022.assessment.csf.orderbackend.repositories.Queries.*;
 
